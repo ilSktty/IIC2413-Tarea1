@@ -1,0 +1,1 @@
+Create table Jugador (nombre varchar(50))
