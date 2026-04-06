@@ -4,7 +4,7 @@ Tarea n°1 de Base de Datos 2026-1.
 ## Datos de las integrantes.
 | Nombre | N° de Alumno |
 | :-: | :-: |
-| Emma Brunetti | - |
+| Emma Brunetti | 23645083 |
 | Scarlette Carter | 25663348 |
 | Antonia Rios | 23644524 |
 
