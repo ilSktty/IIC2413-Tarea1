@@ -6,7 +6,7 @@ Tarea n°1 de Base de Datos 2026-1.
 | :-: | :-: |
 | Emma Brunetti | - |
 | Scarlette Carter | 25663348 |
-| Antonia Rios | - |
+| Antonia Rios | 23644524 |
 
 ## Instrucciones para levantar la aplicación.
 
