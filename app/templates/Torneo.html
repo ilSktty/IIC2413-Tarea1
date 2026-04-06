@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Página de torneos
+        </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='diseño.css') }}">
+    </head>
+    <body>
+        <header>
+            <H1>Torneos</H1>
+        </header>
+        <br>
+        <article>
+            <dl>
+                {% for torneo in torneos %}
+                    <dt><strong>{{ torneo[0] }}</strong></dt>
+                    <dd>Videojuego: AURAAA {{ torneo[1] }} | Premio: ${{ torneo[2] }}</dd>
+                    <br>
+                {% endfor %}
+            </dl>
+        </article>
+    </body>
+</html>

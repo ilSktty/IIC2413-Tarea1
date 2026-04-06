@@ -5,7 +5,6 @@ INSERT INTO Torneos (nombre, videojuego, fecha_inicio, fecha_fin, prize_pool_usd
 ('Los Champions de la Champions', 'EA Sports FC 26', '2026-07-05', '2026-07-15', 100000.00, 8);
 
 -- INSERTAR EQUIPOS (10)
-
 INSERT INTO Equipos (nombre_equipo, fecha_creacion) VALUES 
 ('Mugiwaras', '2026-08-30'),
 ('Avengers', '2023-03-14'),
@@ -18,17 +17,15 @@ INSERT INTO Equipos (nombre_equipo, fecha_creacion) VALUES
 ('PotterHeads', '2023-08-03'), 
 ('Pichanga', '2025-04-20');
 
--- INSERTAR JUGADORES
+-- INSERTAR JUGADORES (50)
 -- Equipo 1: Mugiwaras
 INSERT INTO Jugadores (gamertag, nombre_real, email, fecha_nacimiento, pais, id_equipo) VALUES 
 ('StrawHat', 'Monkey D. Luffy', 'luffy@onepiece.com', '2004-05-05', 'Japón', 1),
 ('PirateHunter', 'Roronoa Zoro', 'zoro@onepiece.com', '2004-11-11', 'Japón', 1),
 ('CatBurglar', 'Nami', 'nami@onepiece.com', '2004-07-03', 'Japón', 1),
 ('BlackLeg', 'Vinsmoke Sanji', 'sanji@onepiece.com', '2004-03-02', 'Japón', 1),
-('CottonCandyLover', 'Tony Tony Chopper', 'chopper@onepiece.com', '2004-12-24', 'Japón', 1),
-('SniperKing', 'Usopp', 'usopp@onepiece.com', '2004-04-01', 'Japón', 1),
-('DemonChild', 'Nico Robin', 'robin@onepiece.com', '2004-02-06', 'Japón', 1),
-('IronManFranky', 'Franky', 'franky@onepiece.com', '2004-03-09', 'Japón', 1);
+('SniperKing', 'Usopp', 'usopp@onepiece.com', '2004-04-01', 'Japón', 1);
+
 -- Equipo 2: Avengers
 INSERT INTO Jugadores (gamertag, nombre_real, email, fecha_nacimiento, pais, id_equipo) VALUES 
 ('Ironman', 'Tony Stark', 'tony@avengers.com', '1970-05-29', 'EE. UU.', 2),
@@ -101,5 +98,38 @@ INSERT INTO Jugadores (gamertag, nombre_real, email, fecha_nacimiento, pais, id_
 ('Starboy', 'Lamine Yamal', 'lyamal@fifa.com', '2007-07-13', 'España', 10),
 ('Grizou', 'Antoine Griezmann', 'agriezmann@fifa.com', '1991-03-21', 'Francia', 10);
 
-
 UPDATE Equipos SET id_capitan = 1 WHERE id_equipo = 1;
+
+-- Inscripciones para el Torneo 1 (Copa Grand Prix) LLENO
+INSERT INTO Inscripciones (id_torneo, id_equipo) VALUES 
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8);
+
+-- INSERTAR SPONSORS (5)
+INSERT INTO Sponsors (nombre, industria) VALUES 
+('Netflix', 'Entretención'), 
+('Red Bull', 'Bebidas'),
+('Stark Industries', 'Tecnología'),
+('Dunder Mifflin', 'Papel'),
+('Shelby Company Ltd', 'Logística');
+
+-- ASIGNAR AUSPICIOS (Monto que pone el sponsor a un torneo específico)
+INSERT INTO Auspicios (id_sponsor, id_torneo, monto_usd) VALUES 
+(1, 1, 15000.00), (2, 1, 5000.00), (3, 3, 20000.00), (4, 2, 12000.00), (5, 3, 30000.00);
+
+
+
+-- usé GEMINI acá:
+-- Partida 1: Fase de Grupos [cite: 36, 62]
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase) 
+VALUES (1, 1, 2, '2026-05-02 14:00:00', 3, 1, 'fase de grupos');
+
+-- Estadísticas individuales de esa partida (id_partida = 1) [cite: 40, 64]
+-- Jugadores de Mugiwaras (IDs 1 al 8)
+INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
+(1, 1, 15, 2, 5), -- Luffy
+(1, 2, 12, 1, 3); -- Zoro
+
+-- Jugadores de Avengers (IDs 9 al 13)
+INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
+(1, 9, 10, 5, 2), -- Ironman
+(1, 11, 8, 4, 10); -- Spiderman
