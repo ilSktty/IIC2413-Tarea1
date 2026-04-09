@@ -139,14 +139,14 @@ VALUES (1, 5, 6, '2026-05-02 17:00:00', 2, 1, 'fase de grupos'),
 (1, 7, 8, '2026-05-07 17:00:00', 5, 2, 'fase de grupos');
 
 --SEMIFINAL (avanzan los dos mejores de cada grupo)
-NSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
 VALUES (1, 4, 7, '2026-05-10 14:00:00', 3, 5, 'semifinal'),
 (1, 4, 8, '2026-05-11 14:30:00', 2, 3, 'semifinal'),
 (1, 2, 7, '2026-05-12 14:00:00', 2, 4, 'semifinal'),
 (1, 2, 8, '2026-05-13 14:30:00', 4, 1, 'semifinal');
 
 --FINAL
-NSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
 VALUES (1, 2, 7, '2026-05-15 12:00:00', 4, 6, 'final');
 
 --ESTADISTICAS
