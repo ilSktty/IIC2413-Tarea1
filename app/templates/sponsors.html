@@ -11,9 +11,42 @@
         </header>
 
         <h2>Buscar sponsors por videojuego</h2>
-        <form>
-            <input type = "text" name = "videojuego" placeholder="Videojuego">
+        <form method="GET">
+            <label for="videojuego">Videojuego:</label>
+            <select name="videojuego" id="videojuego" required>
+                <option value="">Seleccione un  videojuego</option>
+                {% for videojuego in videojuegos %}
+                    <option value="{{ videojuego[0] }}"
+                        {% if videojuego[0] == vj_seleccionado %}selected{% endif %}>
+                        {{ videojuego[0] }}
+                    </option>
+                    {% endfor %}
+            </select>
             <button type="submit">Buscar sponsors</button>
         </form>
+        {% if vj_seleccionado %}
+            <h3>Resultados para {{ vj_seleccionado }}</h3>
+            {% if sponsors_res %}
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nombre Sponsor</th>
+                            <th>Industria</th>
+                            <th>Monto Total Aportado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sponsor in sponsors_res %}
+                            <tr>
+                                <td>{{ sponsor[1] }}</td>
+                                <td>{{ sponsor[2] }}</td>
+                                <td>{{ sponsor[3] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No se encontraron sponsors que hayan auspiciado todos los torneos de este videojuego</p>
+            {% endif %}
     </body>
 </html>

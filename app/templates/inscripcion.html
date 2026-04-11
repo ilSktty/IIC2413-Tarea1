@@ -10,18 +10,33 @@
             <h1>Inscripcion a Torneos</h1>
         </header>
 
-        <form>
+        <form method="POST">
             <label for = "torneo">Torneo:</label>
-            <select name="torneo" id="torneo">
+            <select name="torneo" id="torneo" required>
                 <option value="">Seleccione un torneo</option>
+                {% for torneo in torneos %}
+                    <option value="{{ torneo[0] }}">
+                        {{ torneo[1] }} - {{ torneo[2] }}
+                    </option>
+                {% endfor %}
             </select>
+            <br><br>
 
             <label for = "equipo">Equipo:</label>
-            <select name="equipo" id="equipo">
+            <select name="equipo" id="equipo" required>
                 <option value="">Seleccione un equipo</option>
+                {% for equipo in equipos %}
+                    <option value="{{ equipo[0] }}">
+                        {{ torneo[1] }}
+                    </option>
+                {% endfor %}
             </select>
+            <br><br>
 
             <button type="submit">Inscribir Equipo</button>
         </form>
+        {% if mnsj %}
+            <p>{{ mnsj }}</p>
+        {% endif %}
     </body>
 </html>
