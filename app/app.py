@@ -1,6 +1,6 @@
 import os
 import psycopg2
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -35,11 +35,11 @@ def busqueda():
     return render_template('busqueda.html')
 
 @app.route('/sponsors')
-def busqueda():
+def sponsors():
     return render_template('sponsors.html')
 
 @app.route('/inscripcion')
-def busqueda():
+def inscripcion():
     return render_template('inscripcion.html')
 
 
