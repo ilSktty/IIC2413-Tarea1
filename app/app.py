@@ -30,5 +30,18 @@ def index():
     # Enviamos los datos al HTML
     return render_template('Torneo.html', torneos=lista_torneos)
 
+@app.route('/busqueda')
+def busqueda():
+    return render_template('busqueda.html')
+
+@app.route('/sponsors')
+def busqueda():
+    return render_template('sponsors.html')
+
+@app.route('/inscripcion')
+def busqueda():
+    return render_template('inscripcion.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

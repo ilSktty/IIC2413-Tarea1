@@ -34,13 +34,14 @@ CREATE TABLE Jugadores (
     email VARCHAR(100) NOT NULL,
     fecha_nacimiento DATE,
     pais VARCHAR(50),
-    id_equipo INT REFERENCES Equipos(id_equipo) NOT NULL
+    id_equipo INT REFERENCES Equipos(id_equipo) NOT NULL,
+    CONSTRAINT unico_jugador_eq UNIQUE (id_jugador, id_equipo)
 );
 
 -- Alteramos Equipos para vincular id_capitan
 ALTER TABLE Equipos
 ADD CONSTRAINT fk_capitan
-FOREIGN KEY (id_capitan) REFERENCES Jugadores(id_jugador);
+FOREIGN KEY (id_capitan, id_equipo) REFERENCES Jugadores(id_jugador, id_equipo);
 
 -- 3. Relaciones y Partidas
 CREATE TABLE Inscripciones (
@@ -58,6 +59,8 @@ CREATE TABLE Partidas (
     score_a INT,
     score_b INT,
     fase VARCHAR(50), -- grupos, semifinal, final
+    CONSTRAINT fk_equipo_a FOREIGN KEY (id_torneo, id_equipo_a) REFERENCES Inscripciones(id_torneo, id_equipo),
+    CONSTRAINT fk_equipo_b FOREIGN KEY (id_torneo, id_equipo_b) REFERENCES Inscripciones(id_torneo, id_equipo),
     CONSTRAINT equipos_distintos CHECK (id_equipo_a <> id_equipo_b),
     CONSTRAINT fases_correctas CHECK (fase IN ("fase de grupos", "cuartos de final", "semifinal", "final")), -- hacerlo lowercase, que de lo mismo como lo ingresen
     CONSTRAINT revisar_a CHECK (score_a >= 0),
@@ -75,6 +78,7 @@ CREATE TABLE Estadisticas (
     CONSTRAINT restarts_pos CHECK (restarts >= 0),
     CONSTRAINT assists_pos CHECK (assists >= 0)
 );
+-- No estamos asegurando todavia que ese jugador pertenezca a alguno de los dos equipos de la partida.
 
 CREATE TABLE Auspicios (
     id_sponsor INT REFERENCES Sponsors(id_sponsor),
