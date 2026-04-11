@@ -13,7 +13,7 @@ CREATE TABLE Torneos (
 CREATE TABLE Sponsors (
     id_sponsor SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    industria VARCHAR(50)
+    industria VARCHAR(100)
 );
 
 -- 2. Equipos y Jugadores (Relación uno a varios)
