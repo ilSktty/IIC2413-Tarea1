@@ -2,27 +2,25 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>
-            Página de torneos
-        </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}">
+        <title>Página de torneos</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- cambiar font  -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}"> <!-- cargar al CSS  -->
     </head>
+
     <body>
-        <header>
-            <H1>Torneos</H1>
-        </header>
-        <br>
-        <article>
-            <dl>
-                {% for torneo in torneos %}
-                    <dt><strong>{{ torneo[0] }}</strong></dt>
-                    <dd>Videojuego: AURAAA {{ torneo[1] }} | Premio: ${{ torneo[2] }}</dd>
-                    <dd> <a href="/estadisticas?id_torneo={{torneo[3]}}" class="btn-stats" target="_self">
-                        Ver estadisticas del torneo 
-                    </a> </dd>
-                    <br>
-                {% endfor %}
-            </dl>
-        </article>
-    </body>
+        <div class="contenedor-principal"> 
+            <header>
+                <h1>Torneo de Gaming</h1>
+                <p>Seleccione una opción:</p>
+            </header>
+            
+            <nav class="menu-botones"></nav>
+                <a href="/torneos" class="btn-menu">Torneos</a>
+                <a href="/buscador" class="btn-menu">Buscador</a>
+                <a href="/estadisticas" class="btn-menu">Stats de torneos</a>
+                <a href="/sponsor" class="btn-menu">Sponsor</a>
+                <a href="/inscripcion" class="btn-menu">Inscripción</a>
+            </nav>
+        </div>
+    <body>
 </html>

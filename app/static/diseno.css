@@ -1,0 +1,52 @@
+body{
+    background-color: #439536;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    /* CENTRADO */
+    display: flex;
+    flex-direction: column; /* Alinea (header y nav) uno abajo del otro */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center;    /* Centra horizontalmente */
+    min-height: 100vh;      /* Ocupa el 100% de la altura de la pantalla */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px; /* Espacio entre el título y botones */}
+
+h1 {
+    color: #001F3D;
+    font-size: 3rem; 
+    margin: 0;}
+
+/* Subtítulo */
+header p {
+    color: #001F3D;
+    font-size: 1.2rem;
+    margin-top: 10px;}
+
+/* BOTONES */
+/* Contenedor */
+.menu-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;}
+
+/* Diseño de cada boton */
+.btn-menu {
+    text-decoration: none; /* Quita el subrayado */
+    background-color: #001F3D;
+    color: white;
+    padding: 15px 40px;
+    width: 250px;         /* Un poco más ancho para que quepa el texto */
+    text-align: center;
+    border-radius: 10px;  
+    font-weight: bold;
+    transition: 0.3s;     
+}
+
+.btn-menu:hover {
+    background-color: #b5054e;
+    transform: scale(1.05);
+}

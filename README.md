@@ -6,13 +6,16 @@ Tarea n°1 de Base de Datos 2026-1.
 | :-: | :-: |
 | Emma Brunetti | 23645083 |
 | Scarlette Carter | 25663348 |
-| Antonia Rios | 23644524 |
+| Antonia Ríos | 23644524 |
 
 ## Requisitos y Librerias utilizadas:
 - Python
 - PostgreSQL
 - Flask
 - psycopg2
+- os
+
+
 
 ## Variables del entorno.
 La aplicacion utiliza las siguientes variables de entorno para conectarse a PostgreSQL
@@ -31,14 +34,14 @@ Si estas no son definidas, entonces se usan los valores por defecto:
 
 ## Instrucciones para levantar la aplicación.
 
-# Creacion y carga de base de datos:
-Sobre la creacion y la carga de la BDD, se debe crear una base de datos llamada 'tarea1' en PostgreSQL. Luego, en esta se deben ejecutar los archivos 'schema.sql' y 'data.sql'
+# Creación y carga de base de datos:
+Sobre la creación y la carga de la BDD, se debe crear una base de datos llamada 'tarea1' en PostgreSQL. Luego, en esta se deben ejecutar los archivos 'schema.sql' y 'data.sql'
 
 # Ejecucion de la aplicacion
 Desde la carpeta 'app/' hay que ejecutar:
 python app.py (o python3).
 
-Si no se tienen instaladas las librerias utilizadas, se debe ejecutar:
+Si no se tienen instaladas las librerías utilizadas, se debe ejecutar:
 pip install flask psycopg2
 python app.py (o python3).
 

@@ -66,7 +66,7 @@ CREATE TABLE Partidas (
     CONSTRAINT revisar_a CHECK (score_a >= 0),
     CONSTRAINT revisar_b CHECK (score_b >= 0)
 );
-<
+
 CREATE TABLE Estadisticas (
     id_partida INT REFERENCES Partidas(id_partida),
     id_jugador INT REFERENCES Jugadores(id_jugador),
