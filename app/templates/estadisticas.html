@@ -3,19 +3,43 @@
     <head>
         <meta charset="utf-8">
         <title>
-            Página de estadísticas de torneos
+            Página de estadísticas de torneos 
         </title>
-        <link rel="stylesheet" href="{ url_for('static', filename='diseno.css') }">
-    </head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}">
     <body>
         <header>
-            <H1>Estadísticas del Torneos</H1>
+            <H1>Estadísticas del Torneo {{ nombre_torneo[0] }} </H1>
         </header>
         <br>
+        <nav> 
+            <A href="/" target="_self"> <div id="navegacion">Volver a torneos</div></A>
+        </nav>
         <article>
-            <dl>
-                
-            </dl>
+            <div>
+                <h2> Ranking de jugadores </h2>
+
+                {% for jugador in estadisticas %}
+                    <li><strong>{{ loop.index }}. {{ jugador[0] }} del equipo {{ jugador[1] }} </strong></li>
+                    <br>
+                    <table border="3" bgcolor="white">
+                        <tr>
+                            <th>Total de KOs</th>
+                            <th>Total de restarts</th>
+                            <th>Total de assists</th>
+                            <th>Ratio</th>
+                        </tr>
+                        <tr>
+                            <td>{{ jugador[2] }}</td>
+                            <td>{{ jugador[3] }}</td>
+                            <td>{{ jugador[4] }}</td>
+                            <td>{{ jugador[5] }}</td>
+                        </tr>
+                    </table>
+                    <br>
+                {% endfor %}
+
+            </div>
+            
         </article>
     </body>
 </html>

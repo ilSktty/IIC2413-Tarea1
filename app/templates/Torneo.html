@@ -5,7 +5,7 @@
         <title>
             Página de torneos
         </title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='diseño.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}">
     </head>
     <body>
         <header>
@@ -17,6 +17,9 @@
                 {% for torneo in torneos %}
                     <dt><strong>{{ torneo[0] }}</strong></dt>
                     <dd>Videojuego: AURAAA {{ torneo[1] }} | Premio: ${{ torneo[2] }}</dd>
+                    <dd> <a href="/estadisticas?id_torneo={{torneo[3]}}" class="btn-stats" target="_self">
+                        Ver estadisticas del torneo 
+                    </a> </dd>
                     <br>
                 {% endfor %}
             </dl>

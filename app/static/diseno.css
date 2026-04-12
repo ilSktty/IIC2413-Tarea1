@@ -1,8 +1,15 @@
 body{
-    background-color: #210B4B;
+    background-color: #00B3A1;
 }
 header {
     padding-left: 10%;
     padding-top: 2%;
 }
-h1 {color: #FF3D94; margin: auto;}
+h1 {color: #001F3D; margin: auto;}
+
+#navegacion {
+    margin-right: 2%; background-color: aliceblue; align-items: center;  width: 20%;
+}
+article {
+    padding-right: 15%;
+}
