@@ -1,7 +1,7 @@
 -- INSERTAR TORNEOS (3)
 INSERT INTO Torneos (nombre, videojuego, fecha_inicio, fecha_fin, prize_pool_usd, max_equipos) VALUES 
 ('Copa Grand Prix', 'Mario Kart', '2026-05-01', '2026-05-15', 50000.00, 8),
-('ArenaKing', 'Clash Royale', '2026-06-10', '2026-06-20', 25000.00, 16),
+('ArenaKing', 'Mario Kart', '2026-06-10', '2026-06-20', 25000.00, 16),
 ('Los Champions de la Champions', 'EA Sports FC 26', '2026-07-05', '2026-07-15', 100000.00, 8);
 
 -- INSERTAR EQUIPOS (10)
@@ -114,8 +114,13 @@ INSERT INTO Sponsors (nombre, industria) VALUES
 
 -- ASIGNAR AUSPICIOS (Monto que pone el sponsor a un torneo específico)
 INSERT INTO Auspicios (id_sponsor, id_torneo, monto_usd) VALUES 
-(1, 1, 15000.00), (2, 1, 5000.00), (3, 3, 20000.00), (4, 2, 12000.00), (5, 3, 30000.00);
-
+(1, 1, 15000.00), -- Netflix torneo 1
+(1, 2, 10000.00), -- Netflix torneo 2
+(2, 1, 5000.00), -- Redbull torneo 1
+(4, 2, 12000.00), -- Dunder Mifflin torneo 2
+(3, 3, 20000.00), -- Stark Industries torneo 3
+(5, 3, 30000.00); -- Shelby Company torneo 3
+ 
 
 
 -- usé GEMINI acá:

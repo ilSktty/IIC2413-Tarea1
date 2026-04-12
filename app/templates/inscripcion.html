@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Formulario de Inscripcion</title>
+        <link rel = "stylesheet" href="{{ url_for('static', filename='diseño.css')}}">
+    </head>
+    <body>
+        <header>
+            <h1>Inscripcion a Torneos</h1>
+        </header>
+
+        <form method="POST">
+            <label for = "torneo">Torneo:</label>
+            <select name="torneo" id="torneo" required>
+                <option value="">Seleccione un torneo</option>
+                {% for torneo in torneos %}
+                    <option value="{{ torneo[0] }}">
+                        {{ torneo[1] }} - {{ torneo[2] }}
+                    </option>
+                {% endfor %}
+            </select>
+            <br><br>
+
+            <label for = "equipo">Equipo:</label>
+            <select name="equipo" id="equipo" required>
+                <option value="">Seleccione un equipo</option>
+                {% for equipo in equipos %}
+                    <option value="{{ equipo[0] }}">
+                        {{ equipo[1] }}
+                    </option>
+                {% endfor %}
+            </select>
+            <br><br>
+
+            <button type="submit">Inscribir Equipo</button>
+        </form>
+        {% if mnsj %}
+            <p>{{ mnsj }}</p>
+        {% endif %}
+    </body>
+</html>

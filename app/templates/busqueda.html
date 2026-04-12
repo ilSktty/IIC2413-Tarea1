@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Pagina de busqueda</title>
+        <link rel = "stylesheet" href = "{{ url_for('static', filename = 'diseño.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1>Busqueda</h1>
+        </header>
+
+        <h2>Buscar jugadores</h2>
+        <form method="GET">
+            <input type = "text" name = "buscar_jugador" placeholder="Gamertag o pais" value="{{ buscar_jugador }}">
+            <button type="submit">Buscar jugadores</button>
+        </form>
+
+        {% if buscar_jugador %}
+            <h3>Resultados de jugadores</h3>
+            {% if jugadores %}
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Gamertag</th>
+                            <th>Nombre Real</th>
+                            <th>Pais</th>
+                            <th>Equipo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for jugador in jugadores %}
+                            <tr>
+                                <td>{{ jugador[0] }}</td>
+                                <td>{{ jugador[1] }}</td>
+                                <td>{{ jugador[2] }}</td>
+                                <td>{{ jugador[3] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No se encontraron jugadores</p>
+            {% endif %}
+        {% endif %}
+
+        <hr>
+
+        <h2>Buscar Equipos</h2>
+        <form method="GET">
+            <input type = "text" name = "buscar_equipo" placeholder="Nombre del equipo" value="{{ buscar_equipo }}">
+            <button type="submit">Buscar equipos</button>
+        </form>
+
+        {% if buscar_equipo %}
+            <h3>Resultados de equipos</h3>
+            {% if equipos %}
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Equipo</th>
+                            <th>Fecha Creacion</th>
+                            <th>Cantidad Jugadores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for equipo in equipos %}
+                            <tr>
+                                <td>{{ equipo[1] }}</td>
+                                <td>{{ equipo[2] }}</td>
+                                <td>{{ equipo[3] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No se encontraron equipos</p>
+            {% endif %}
+        {% endif %}
+    </body>
+</html>
