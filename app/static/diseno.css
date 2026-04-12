@@ -25,13 +25,16 @@ header p {
     font-size: 1.2rem;
     margin-top: 10px;}
 
-/* BOTONES */
+/* BOTONES INICIO*/
 /* Contenedor */
 .menu-botones {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Cambiado de column a row para alineación horizontal */
     gap: 15px;
-    align-items: center;}
+    justify-content: center; /* Centra los botones horizontalmente */
+    flex-wrap: wrap;       /* Si no caben todos en una línea, saltan a la siguiente */
+    align-items: center;
+}
 
 /* Diseño de cada boton */
 .btn-menu {
@@ -49,4 +52,18 @@ header p {
 .btn-menu:hover {
     background-color: #b5054e;
     transform: scale(1.05);
+}
+
+/*BOTÓN "Ver más" */
+.btn-ver-mas {
+    text-decoration: none;
+    background-color: #001F3D;
+    color: white;
+    padding:6px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.btn-ver-mas:hover {
+    background-color: #b5054e;
 }

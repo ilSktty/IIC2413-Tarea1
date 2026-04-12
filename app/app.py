@@ -21,18 +21,21 @@ def get_db_connection():
 # --------------------------
 # PÁGINA DE TORNEOS - lista de tornes
 # --------------------------
+
 @app.route('/')
+def home():
+    return render_template('pagina_inicio.html')
+
+@app.route('/torneos')
 def index():
     conn = get_db_connection()
     cur = conn.cursor()
-    # CONSULTA SQL EXPLÍCITA: Traer los torneos que insertamos en data.sql ordnados por fecha de inicio.
-    cur.execute('SELECT nombre, videojuego, prize_pool_usd, id_torneo, fecha_inicio, fecha_fin FROM Torneos ORDER BY fecha_inicio;')
+    cur.execute("SELECT id_torneo, nombre, videojuego, fecha_inicio, fecha_fin, prize_pool_usd, max_equipos FROM Torneos;")
     lista_torneos = cur.fetchall()
     cur.close() 
     conn.close()
     # Enviamos los datos al HTML
-    return render_template('Torneo.html', torneos=lista_torneos)
-
+    return render_template('torneos.html', torneos=lista_torneos)
 
 # --------------------------
 #DETALLES DE UN TORNEO:
@@ -131,7 +134,7 @@ def detalle_torneo(id_torneo):
 
     # Pasamos todas las variables al template para que las renderice
     return render_template(
-        'torneo_detalle.html',
+        'detalles_torneo.html',
         torneo=torneo,
         id_torneo=id_torneo,
         tabla_posiciones=tabla_posiciones,
