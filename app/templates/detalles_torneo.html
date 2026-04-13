@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}">
+    <title>Detalle del Torneo</title>
+</head>
+
+<body class="detalle"> 
+    <h1>Detalle del Torneo: {{ torneo[0] }}</h1>
+    <nav><a href="/torneos" class="btn-ver-mas">Volver atrás</a>
+        <a href="{{ url_for('estadisticas', id_torneo=id_torneo) }} " class="btn-ver-mas">Conocer las estadisticas de la partida</a>
+    </nav>
+
+    <h2>Tabla de Posiciones</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in tabla_posiciones %}
+            <tr>
+                <td>{{ fila[0] }}</td> <td>{{ fila[1] }}</td> <td>{{ fila[2] }}</td> <td>{{ fila[3] }}</td> <td>{{ fila[4] }}</td> <td>{{ fila[5] }}</td> </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Partidas</h2>
+    <ul>
+        {% for p in partidas %}
+            <li><strong>{{ p[5] }}</strong>: {{ p[1] }} ({{ p[3] }}) vs {{ p[2] }} ({{ p[4] }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Equipos Inscritos</h2>
+    <p>{% for e in equipos_inscritos %}{{ e[0] }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
+
+    <h2>Sponsors</h2>
+    <p>{% for s in sponsors %}{{ s[0] }} (${{ s[2] }}){% if not loop.last %}, {% endif %}{% endfor %}</p>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}">
+    <title>Lista de Torneos</title>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <h1>Torneos Disponibles</h1>
+        
+        <table border="1" style="width:100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Videojuego</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Prize Pool (USD)</th>
+                    <th>Equipos Máx.</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in torneos %}
+                <tr>
+                    <td>{{ t[1] }}</td>
+                    <td>{{ t[2] }}</td>
+                    <td>{{ t[3] }}</td>
+                    <td>{{ t[4] }}</td>
+                    <td>${{ t[5] }}</td>
+                    <td>{{ t[6] }}</td>
+                    <td>
+                        <a href="/torneo/{{ t[0] }}" class="btn-ver-mas">Ver más</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="/" class="btn-menu" style="background-color: grey;">Volver al Inicio</a>
+    </div>
+</body>
+</html>

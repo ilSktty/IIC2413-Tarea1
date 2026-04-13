@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Página de torneos</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet"> <!-- cambiar font  -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}"> <!-- cargar al CSS  -->
+    </head>
+
+    <body>
+        <div class="contenedor-principal"> 
+            <header>
+                <h1>Torneo de Gaming</h1>
+                <p>Seleccione una opción:</p>
+            </header>
+            
+            <nav class="menu-botones">
+                <a href="/torneos" class="btn-menu">Torneos</a>
+                <a href="/busqueda" class="btn-menu">Busqueda</a>
+                <a href="/estadisticas" class="btn-menu">Stats de torneos</a>
+                <a href="/sponsors" class="btn-menu">Sponsors</a>
+                <a href="/inscripcion" class="btn-menu">Inscripción</a>
+            </nav>
+        </div>
+    <body>
+</html>
