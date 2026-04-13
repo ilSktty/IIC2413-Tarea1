@@ -35,14 +35,20 @@ def index():
 @app.route('/estadisticas', methods = ['GET'])
 def estadisticas():
     #Recibimos el id del torneo para obtener su información
-    id = request.args.get('id_torneo') 
+    id_torneo = request.args.get('id_torneo') 
+    id_equipo_seleccionado = request.args.get('id_equipo') 
+
+    if not id_torneo or id_torneo == '':
+        return "Falta el ID del torneo", 400
+
     conn = get_db_connection()
     cur = conn.cursor()
 
     # CONSULTAS SQL 
-    cur.execute('SELECT nombre FROM Torneos WHERE id_torneo= %s',(id,)) 
+    cur.execute('SELECT nombre FROM Torneos WHERE id_torneo= %s',(id_torneo,)) 
     nombre_torneo = cur.fetchone()
 
+    #Ranking
     consulta = '''
     SELECT 
     j.gamertag, 
@@ -60,13 +66,44 @@ def estadisticas():
     HAVING COUNT(e.id_partida) >= 2
     ORDER BY ratio DESC;
     '''
-    cur.execute(consulta,(id,))
+    cur.execute(consulta,(id_torneo,))
     datos = cur.fetchall()
+
+    #Evolución por fases
+    consulta = '''
+    SELECT  e.id_equipo, e.nombre_equipo
+    FROM Equipos e
+    JOIN Inscripciones i ON i.id_equipo = e.id_equipo
+    WHERE i.id_torneo = %s
+    '''
+    cur.execute(consulta,(id_torneo,))
+    equipos = cur.fetchall()
+
+
+    seleccionados = []
+    consulta ='''
+    SELECT 
+        j.gamertag,
+        COALESCE(ROUND(AVG(e.kos) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_kos_grupos,
+        COALESCE(ROUND(AVG(e.restarts) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_restarts_grupos,
+        COALESCE(ROUND(AVG(e.assists) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_assists_grupos,
+        COALESCE(ROUND(AVG(e.kos) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_kos_eliminatorias,
+        COALESCE(ROUND(AVG(e.restarts) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_restarts_eliminatorias,
+        COALESCE(ROUND(AVG(e.assists) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_assists_eliminatorias
+    FROM Estadisticas e
+    JOIN Partidas p ON e.id_partida = p.id_partida
+    JOIN Jugadores j ON e.id_jugador = j.id_jugador
+    WHERE p.id_torneo = %s AND j.id_equipo = %s
+    GROUP BY j.gamertag
+    '''
+    cur.execute(consulta,(id_torneo, id_equipo_seleccionado))
+    seleccionados = cur.fetchall()
 
     cur.close()
     conn.close()
 
-    return render_template('estadisticas.html', id_torneo=id, nombre_torneo=nombre_torneo, estadisticas=datos)
+    return render_template('estadisticas.html', id_torneo=id_torneo, nombre_torneo=nombre_torneo, 
+                           estadisticas=datos, equipos=equipos, evolucion=seleccionados)
 
 @app.route('/busqueda', methods = ['GET'])
 def busqueda():
