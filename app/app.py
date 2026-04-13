@@ -367,14 +367,14 @@ def inscripcion():
             max_equipos = cur.fetchone()[0]
 
             if actuales >= max_equipos:
-                mnsj = 'No se puede realizar la inscripcion, el torneo ya tiene su maximo de equipos'
+                mnsj = 'No se puede realizar la inscripcion, el torneo ya tiene su máximo de equipos'
             else:
                 cur.execute("""
                     INSERT INTO Inscripciones (id_torneo, id_equipo)
                     VALUES (%s, %s)
                 """, (id_torneo, id_equipo))
                 conn.commit()
-                mnsj = 'Inscripcion exitosa'
+                mnsj = 'Inscripción exitosa'
     cur.close()
     conn.close()
     return render_template(
