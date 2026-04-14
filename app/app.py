@@ -160,6 +160,7 @@ def estadisticas():
     cur = conn.cursor()
 
     # CONSULTAS SQL 
+    #nombre del torneo
     cur.execute('SELECT nombre FROM Torneos WHERE id_torneo= %s',(id_torneo,)) 
     nombre_torneo = cur.fetchone()
 
@@ -185,6 +186,7 @@ def estadisticas():
     datos = cur.fetchall()
 
     #Evolución por fases
+    #equipos disponibles
     consulta = '''
     SELECT  e.id_equipo, e.nombre_equipo
     FROM Equipos e
@@ -194,7 +196,7 @@ def estadisticas():
     cur.execute(consulta,(id_torneo,))
     equipos = cur.fetchall()
 
-
+    #comparación por jugador del equipo
     seleccionados = []
     if id_equipo_seleccionado:
         consulta ='''
@@ -218,10 +220,13 @@ def estadisticas():
     cur.close()
     conn.close()
 
+    #retornamos las consultas requeridas
     return render_template('estadisticas.html', id_torneo=id_torneo, nombre_torneo=nombre_torneo, 
                            estadisticas=datos, equipos=equipos, evolucion=seleccionados)
 
-
+# --------------------------
+#BÚSQUEDA
+# --------------------------
 @app.route('/busqueda', methods = ['GET'])
 def busqueda():
     buscar_jugador = request.args.get('buscar_jugador','')
@@ -263,7 +268,9 @@ def busqueda():
         buscar_equipo = buscar_equipo
     )
 
-
+# --------------------------
+# SPONSORS
+# --------------------------
 
 @app.route('/sponsors', methods = ['GET'])
 def sponsors():
@@ -313,7 +320,9 @@ def sponsors():
         vj_seleccionado = vj_seleccionado
     )
 
-
+# --------------------------
+#INSCRIPCIÓN
+# --------------------------
 @app.route('/inscripcion', methods = ['GET', 'POST'])
 def inscripcion():
     torneos = []

@@ -161,14 +161,16 @@ INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, 
 (1, 4, 8, '2026-05-11 14:30:00', 2, 3, 'semifinal'),
 (1, 2, 7, '2026-05-12 14:00:00', 2, 4, 'semifinal'),
 (1, 2, 8, '2026-05-13 14:30:00', 4, 1, 'semifinal');
+-- resultados --> Equipo 2: (3 pts), Equipo 4: (0 pts), Equipo 7: (6 pts), Equipo 8: (3 pts)
 
---FINAL
+--Final
 INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
 VALUES (1, 2, 7, '2026-05-15 12:00:00', 4, 6, 'final');
-
+-- resultados --> Equipo 2: (0 pts), Equipo 7: (3 pts)
 
 
 --ESTADISTICAS
+-- FASE DE GRUPOS - GRUPO 1
 -- Partida 1: Mugiwaras (Equipo 1) vs Avengers (Equipo 2) --> Gana Mugiwaras 3-1
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
 (1, 1, 16, 1, 5), (1, 2, 13, 2, 6), (1, 3, 15, 1, 3), (1, 4, 11, 3, 7), (1, 5, 12, 2, 5), 
@@ -204,7 +206,7 @@ INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
 (7, 21, 16, 1, 5), (7, 22, 13, 2, 6), (7, 23, 15, 1, 3), (7, 24, 11, 3, 7), (7, 25, 12, 2, 5), 
 (7, 26, 7, 8, 4), (7, 27, 6, 9, 5), (7, 28, 9, 7, 3), (7, 29, 8, 10, 4), (7, 30, 5, 12, 2);
--- ##################
+
 -- Partida 8: TheWalkingDead (Equipo 5) vs TVD (Equipo 7) --> Gana TVD 2-3
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
 (8, 21, 7, 8, 4), (8, 22, 6, 9, 5), (8, 23, 9, 7, 3), (8, 24, 8, 10, 4), (8, 25, 5, 12, 2), 
