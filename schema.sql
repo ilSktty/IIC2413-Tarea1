@@ -24,7 +24,7 @@ CREATE TABLE Equipos (
     id_equipo SERIAL PRIMARY KEY,
     nombre_equipo VARCHAR(100) UNIQUE NOT NULL,
     fecha_creacion DATE,
-    id_capitan INT-- Se vincula después de crear Jugadores
+    id_capitan INT NOT NULL-- Se vincula después de crear Jugadores
 );
 
 CREATE TABLE Jugadores (
@@ -55,7 +55,7 @@ CREATE TABLE Partidas (
     id_torneo INT REFERENCES Torneos(id_torneo),
     id_equipo_a INT REFERENCES Equipos(id_equipo),
     id_equipo_b INT REFERENCES Equipos(id_equipo),
-    fecha_hora TIMESTAMP,
+    fecha_hora TIMESTAMP
     score_a INT,
     score_b INT,
     fase VARCHAR(50), -- grupos, semifinal, final

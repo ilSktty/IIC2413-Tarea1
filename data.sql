@@ -98,9 +98,19 @@ INSERT INTO Jugadores (gamertag, nombre_real, email, fecha_nacimiento, pais, id_
 ('Starboy', 'Lamine Yamal', 'lyamal@fifa.com', '2007-07-13', 'España', 10),
 ('Grizou', 'Antoine Griezmann', 'agriezmann@fifa.com', '1991-03-21', 'Francia', 10);
 
-UPDATE Equipos SET id_capitan = 1 WHERE id_equipo = 1;
+-- ASIGNACIÓN DE CAPITANES (Primer jugador de cada equipo)
+UPDATE Equipos SET id_capitan = 1 WHERE id_equipo = 1;  -- StrawHat (Mugiwaras)
+UPDATE Equipos SET id_capitan = 6 WHERE id_equipo = 2;  -- Ironman (Avengers)
+UPDATE Equipos SET id_capitan = 11 WHERE id_equipo = 3; -- WorldBestBoss (The Office)
+UPDATE Equipos SET id_capitan = 16 WHERE id_equipo = 4; -- itgirl (Gossip Girl)
+UPDATE Equipos SET id_capitan = 21 WHERE id_equipo = 5; -- Grimes (The Walking Dead)
+UPDATE Equipos SET id_capitan = 26 WHERE id_equipo = 6; -- TommyShelby (Peaky Blinders)
+UPDATE Equipos SET id_capitan = 31 WHERE id_equipo = 7; -- TeamStef (TVD)
+UPDATE Equipos SET id_capitan = 36 WHERE id_equipo = 8; -- Eleven (UpsideDown)
+UPDATE Equipos SET id_capitan = 41 WHERE id_equipo = 9; -- TheChosenOne (Potterheads)
+UPDATE Equipos SET id_capitan = 46 WHERE id_equipo = 10; -- GOAT (Pichanga)
 
--- Inscripciones para el Torneo 1 (Copa Grand Prix) LLENO
+-- INSCRIPCIONES PARA EL TORNEO 1 (Copa Grand Prix) LLENO
 INSERT INTO Inscripciones (id_torneo, id_equipo) VALUES 
 (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8);
 
@@ -121,31 +131,33 @@ INSERT INTO Auspicios (id_sponsor, id_torneo, monto_usd) VALUES
 (3, 3, 20000.00), -- Stark Industries torneo 3
 (5, 3, 30000.00); -- Shelby Company torneo 3
  
-
-
--- usé GEMINI acá:
--- Partida 1: Fase de Grupos [cite: 36, 62]
--- ROUND-ROBIN : [1-4] 
-INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase) 
-VALUES (1, 1, 2, '2026-05-02 14:00:00', 3, 1, 'fase de grupos'),
+------------
+-- TORNEO 1 
+------------
+-- Formato PARTIDAS TORNEO 1: round-robin (todos contra todos).
+-- Fase de Grupos (grupo 1): 
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase) VALUES 
+(1, 1, 2, '2026-05-02 14:00:00', 3, 1, 'fase de grupos'),
 (1, 1, 3, '2026-05-03 14:00:00', 2, 4, 'fase de grupos'),
 (1, 1, 4, '2026-05-04 14:00:00', 0, 2, 'fase de grupos'),
 (1, 2, 3, '2026-05-05 14:00:00', 3, 2, 'fase de grupos'),
 (1, 2, 4, '2026-05-06 14:00:00', 1, 3, 'fase de grupos'),
 (1, 3, 4, '2026-05-07 14:00:00', 0, 2, 'fase de grupos');
+-- resultados --> Equipo 1: (3 pts), Equipo 2: (3 pts), Equipo 3: (3 pts), Equipo 4: (9 pts)
 
--- ROUND-ROBIN : [5-8]
-INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase) 
-VALUES (1, 5, 6, '2026-05-02 17:00:00', 2, 1, 'fase de grupos'),
+-- Fase de Grupos (grupo 2) 
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase) VALUES 
+(1, 5, 6, '2026-05-02 17:00:00', 2, 1, 'fase de grupos'),
 (1, 5, 7, '2026-05-03 17:00:00', 2, 3, 'fase de grupos'),
 (1, 5, 8, '2026-05-04 17:00:00', 0, 1, 'fase de grupos'),
 (1, 6, 7, '2026-05-05 17:00:00', 1, 4, 'fase de grupos'),
 (1, 6, 8, '2026-05-06 17:00:00', 3, 2, 'fase de grupos'),
 (1, 7, 8, '2026-05-07 17:00:00', 5, 2, 'fase de grupos');
+-- resultados --> Equipo 5: (3 pts), Equipo 6: (3 pts), Equipo 7: (9 pts), Equipo 8: (3 pts)
 
---SEMIFINAL (avanzan los dos mejores de cada grupo)
-INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
-VALUES (1, 4, 7, '2026-05-10 14:00:00', 3, 5, 'semifinal'),
+-- Semifinal (avanzan los dos mejores de cada grupo)
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase) VALUES 
+(1, 4, 7, '2026-05-10 14:00:00', 3, 5, 'semifinal'),
 (1, 4, 8, '2026-05-11 14:30:00', 2, 3, 'semifinal'),
 (1, 2, 7, '2026-05-12 14:00:00', 2, 4, 'semifinal'),
 (1, 2, 8, '2026-05-13 14:30:00', 4, 1, 'semifinal');
@@ -154,91 +166,116 @@ VALUES (1, 4, 7, '2026-05-10 14:00:00', 3, 5, 'semifinal'),
 INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
 VALUES (1, 2, 7, '2026-05-15 12:00:00', 4, 6, 'final');
 
+
+
 --ESTADISTICAS
--- ROUND-ROBIN : [1-4] 
--- Partida 1: Mugiwaras (1-5) / Avengers (6-10)
+-- Partida 1: Mugiwaras (Equipo 1) vs Avengers (Equipo 2) --> Gana Mugiwaras 3-1
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(1, 1, 15, 2, 5), (1, 2, 12, 1, 3), (1, 3, 10, 0, 4), (1, 4, 8, 0, 10), (1, 5, 13, 2, 3), -- Equipo 1
-(1, 6, 9, 6, 2), (1, 7, 7, 8, 4), (1, 8, 11, 5, 3), (1, 9, 10, 7, 1), (1, 10, 4, 9, 5); -- Equipo 2
+(1, 1, 16, 1, 5), (1, 2, 13, 2, 6), (1, 3, 15, 1, 3), (1, 4, 11, 3, 7), (1, 5, 12, 2, 5), 
+(1, 6, 7, 8, 4), (1, 7, 6, 9, 5), (1, 8, 9, 7, 3), (1, 9, 8, 10, 4), (1, 10, 5, 12, 2);
 
--- Partida 2: Mugiwaras (1-5) / TheOffice (11-15)
+-- Partida 2: Mugiwaras (Equipo 1) vs TheOffice (Equipo3) --> Gana TheOffice 2-4
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(2, 1, 10, 3, 8), (2, 2, 9, 2, 4), (2, 3, 14, 1, 2), (2, 4, 5, 4, 12), (2, 5, 11, 2, 6), -- Equipo 1
-(2, 11, 8, 5, 3), (2, 12, 6, 7, 5), (2, 13, 12, 4, 2), (2, 14, 9, 6, 4), (2, 15, 7, 8, 1); -- Equipo 3
+(2, 1, 7, 8, 4), (2, 2, 6, 9, 5), (2, 3, 9, 7, 3), (2, 4, 8, 10, 4), (2, 5, 5, 12, 2), 
+(2, 11, 16, 1, 5), (2, 12, 13, 2, 6), (2, 13, 15, 1, 3), (2, 14, 11, 3, 7), (2, 15, 12, 2, 5);
 
--- Partida 3: Mugiwaras (1-5) / GossipGirl (16-20)
+-- Partida 3: Mugiwaras (Equipo 1) vs GossipGirl (Equipo 4) --> Gana GossipGirl 0-2
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(3, 1, 18, 1, 4), (3, 2, 14, 0, 5), (3, 3, 9, 3, 2), (3, 4, 7, 2, 9), (3, 5, 12, 1, 7), -- Equipo 1
-(3, 16, 5, 9, 4), (3, 17, 8, 6, 2), (3, 18, 10, 5, 3), (3, 19, 6, 7, 6), (3, 20, 4, 10, 1); -- Equipo 4
+(3, 1, 7, 8, 4), (3, 2, 6, 9, 5), (3, 3, 9, 7, 3), (3, 4, 8, 10, 4), (3, 5, 5, 12, 2), 
+(3, 16, 16, 1, 5), (3, 17, 13, 2, 6), (3, 18, 15, 1, 3), (3, 19, 11, 3, 7), (3, 20, 12, 2, 5);
 
--- Partida 4: Avengers (6-10) / TheOffice (11-15)
+-- Partida 4: Avengers (Equipo 2) vs TheOffice (Equipo 3) --> Gana Avengers 3-2
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(4, 6, 12, 3, 5), (4, 7, 10, 4, 2), (4, 8, 15, 2, 4), (4, 9, 8, 3, 7), (4, 10, 9, 5, 3), -- Equipo 2
-(4, 11, 11, 4, 6), (4, 12, 7, 6, 8), (4, 13, 13, 3, 2), (4, 14, 10, 5, 4), (4, 15, 6, 8, 5); -- Equipo 3
+(4, 6, 16, 1, 5), (4, 7, 13, 2, 6), (4, 8, 15, 1, 3), (4, 9, 11, 3, 7), (4, 10, 12, 2, 5), 
+(4, 11, 7, 8, 4), (4, 12, 6, 9, 5), (4, 13, 9, 7, 3), (4, 14, 8, 10, 4), (4, 15, 5, 12, 2);
 
--- Partida 5: Avengers (6-10) / GossipGirl (16-20)
+-- Partida 5: Avengers (Equipo 2) vs GossipGirl (Equipo 4) --> Gana GossipGirl 1-3
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(5, 6, 14, 2, 4), (5, 7, 11, 3, 6), (5, 8, 13, 1, 5), (5, 9, 9, 4, 8), (5, 10, 10, 2, 3), -- Equipo 2
-(5, 16, 7, 6, 2), (5, 17, 5, 8, 4), (5, 18, 9, 5, 3), (5, 19, 8, 7, 5), (5, 20, 6, 9, 2); -- Equipo 4
+(5, 6, 7, 8, 4), (5, 7, 6, 9, 5), (5, 8, 9, 7, 3), (5, 9, 8, 10, 4), (5, 10, 5, 12, 2), 
+(5, 16, 16, 1, 5), (5, 17, 13, 2, 6), (5, 18, 15, 1, 3), (5, 19, 11, 3, 7), (5, 20, 12, 2, 5);
 
--- Partida 6: TheOffice (11-15) / GossipGirl (16-20)
+-- Partida 6: TheOffice (Equipo 3) vs GossipGirl (Equipo 4) --> Gana GossipGirl 0-2
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(6, 11, 16, 1, 3), (6, 12, 12, 2, 5), (6, 13, 10, 0, 7), (6, 14, 9, 3, 4), (6, 15, 11, 2, 2), -- Equipo 3
-(6, 16, 8, 5, 6), (6, 17, 7, 7, 3), (6, 18, 11, 4, 2), (6, 19, 6, 6, 8), (6, 20, 5, 8, 4); -- Equipo 4
+(6, 11, 7, 8, 4), (6, 12, 6, 9, 5), (6, 13, 9, 7, 3), (6, 14, 8, 10, 4), (6, 15, 5, 12, 2), 
+(6, 16, 16, 1, 5), (6, 17, 13, 2, 6), (6, 18, 15, 1, 3), (6, 19, 11, 3, 7), (6, 20, 12, 2, 5);
 
--- ROUND-ROBIN : [5-8] 
--- Partida 7: TheWalkingDead (21-25) / PeakyBlinders (26-30)
+-- FASE DE GRUPOS - GRUPO 2
+-- Partida 7: TheWalkingDead (Equipo 5) vs PeakyBlinders (Equipo 6) --> Gana TWD 2-1
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(7, 21, 13, 3, 6), (7, 22, 10, 4, 4), (7, 23, 15, 2, 2), (7, 24, 8, 5, 9), (7, 25, 11, 3, 5), -- Equipo 5
-(7, 26, 12, 4, 4), (7, 27, 9, 6, 5), (7, 28, 14, 3, 3), (7, 29, 10, 5, 2), (7, 30, 7, 7, 6); -- Equipo 6
+(7, 21, 16, 1, 5), (7, 22, 13, 2, 6), (7, 23, 15, 1, 3), (7, 24, 11, 3, 7), (7, 25, 12, 2, 5), 
+(7, 26, 7, 8, 4), (7, 27, 6, 9, 5), (7, 28, 9, 7, 3), (7, 29, 8, 10, 4), (7, 30, 5, 12, 2);
+-- ##################
+-- Partida 8: TheWalkingDead (Equipo 5) vs TVD (Equipo 7) --> Gana TVD 2-3
+INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
+(8, 21, 7, 8, 4), (8, 22, 6, 9, 5), (8, 23, 9, 7, 3), (8, 24, 8, 10, 4), (8, 25, 5, 12, 2), 
+(8, 31, 16, 1, 5), (8, 32, 13, 2, 6), (8, 33, 15, 1, 3), (8, 34, 11, 3, 7), (8, 35, 12, 2, 5);
 
--- Partida 8: TheWalkingDead (21-25) / TVD (31-35)
+-- Partida 9: TheWalkingDead (Equipo 5) vs UpsideDown (Equipo 8) --> Gana UpsideDown 0-1
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(8, 21, 14, 2, 5), (8, 22, 12, 3, 3), (8, 23, 11, 1, 4), (8, 24, 7, 4, 10), (8, 25, 13, 2, 4), -- Equipo 5
-(8, 31, 9, 5, 2), (8, 32, 8, 7, 5), (8, 33, 12, 4, 3), (8, 34, 10, 6, 1), (8, 35, 6, 8, 4); -- Equipo 7
+(9, 21, 7, 8, 4), (9, 22, 6, 9, 5), (9, 23, 9, 7, 3), (9, 24, 8, 10, 4), (9, 25, 5, 12, 2), 
+(9, 36, 16, 1, 5), (9, 37, 13, 2, 6), (9, 38, 15, 1, 3), (9, 39, 11, 3, 7), (9, 40, 12, 2, 5);
 
--- Partida 9: TheWalkingDead (21-25) / UpsideDown (36-40)
+-- Partida 10: PeakyBlinders (Equipo 6) vs TVD (Equipo 7) --> Gana TVD 1-4
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(9, 21, 17, 1, 4), (9, 22, 13, 2, 6), (9, 23, 10, 0, 5), (9, 24, 6, 3, 11), (9, 25, 12, 2, 3), -- Equipo 5
-(9, 36, 5, 8, 3), (9, 37, 7, 6, 5), (9, 38, 11, 5, 2), (9, 39, 9, 7, 4), (9, 40, 4, 10, 6); -- Equipo 8
+(10, 26, 7, 8, 4), (10, 27, 6, 9, 5), (10, 28, 9, 7, 3), (10, 29, 8, 10, 4), (10, 30, 5, 12, 2), 
+(10, 31, 16, 1, 5), (10, 32, 13, 2, 6), (10, 33, 15, 1, 3), (10, 34, 11, 3, 7), (10, 35, 12, 2, 5);
 
--- Partida 10: PeakyBlinders (26-30) / TVD (31-35)
+-- Partida 11: PeakyBlinders (Equipo 6) vs UpsideDown (Equipo 8) --> Gana PeakyBlinders 3-2
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(10, 26, 15, 2, 4), (10, 27, 11, 3, 7), (10, 28, 14, 1, 3), (10, 29, 10, 4, 5), (10, 30, 9, 2, 6), -- Equipo 6
-(10, 31, 8, 6, 3), (10, 32, 7, 8, 5), (10, 33, 11, 5, 2), (10, 34, 10, 7, 4), (10, 35, 6, 9, 3); -- Equipo 7
+(11, 26, 16, 1, 5), (11, 27, 13, 2, 6), (11, 28, 15, 1, 3), (11, 29, 11, 3, 7), (11, 30, 12, 2, 5), 
+(11, 36, 7, 8, 4), (11, 37, 6, 9, 5), (11, 38, 9, 7, 3), (11, 39, 8, 10, 4), (11, 40, 5, 12, 2);
 
--- Partida 11: PeakyBlinders (26-30) / UpsideDown (36-40)
+-- Partida 12: TVD (Equipo 7) vs UpsideDown (Equipo 8) --> Gana TVD 5-2
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(11, 26, 13, 3, 5), (11, 27, 10, 4, 4), (11, 28, 16, 2, 2), (11, 29, 9, 5, 8), (11, 30, 11, 3, 4), -- Equipo 6
-(11, 36, 7, 7, 4), (11, 37, 6, 9, 6), (11, 38, 12, 5, 3), (11, 39, 10, 6, 2), (11, 40, 5, 11, 5); -- Equipo 8
+(12, 31, 16, 1, 5), (12, 32, 13, 2, 6), (12, 33, 15, 1, 3), (12, 34, 11, 3, 7), (12, 35, 12, 2, 5), 
+(12, 36, 7, 8, 4), (12, 37, 6, 9, 5), (12, 38, 9, 7, 3), (12, 39, 8, 10, 4), (12, 40, 5, 12, 2);
 
--- Partida 12: TVD (31-35) / UpsideDown (36-40)
+-- SEMIFINALES
+-- Partida 13: GossipGirl (Equipo 4) vs TVD (Equipo 7) --> Gana TVD 3-5
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(12, 31, 12, 4, 6), (12, 32, 10, 5, 4), (12, 33, 14, 3, 3), (12, 34, 9, 6, 7), (12, 35, 11, 4, 5), -- Equipo 7
-(12, 36, 11, 5, 4), (12, 37, 8, 7, 6), (12, 38, 13, 4, 2), (12, 39, 10, 6, 3), (12, 40, 7, 8, 5); -- Equipo 8
+(13, 16, 7, 8, 4), (13, 17, 6, 9, 5), (13, 18, 9, 7, 3), (13, 19, 8, 10, 4), (13, 20, 5, 12, 2), 
+(13, 31, 16, 1, 5), (13, 32, 13, 2, 6), (13, 33, 15, 1, 3), (13, 34, 11, 3, 7), (13, 35, 12, 2, 5);
 
---SEMIFINAL 
--- Partida 13: GossipGirl (16-20) / TVD (31-35)
+-- Partida 14: GossipGirl (Equipo 4) vs UpsideDown Equipo 8) --> Gana UpsideDown 2-3
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(13, 16, 10, 5, 7), (13, 17, 8, 6, 4), (13, 18, 13, 4, 2), (13, 19, 9, 7, 5), (13, 20, 7, 9, 3), -- Equipo 4
-(13, 31, 14, 3, 5), (13, 32, 11, 4, 8), (13, 33, 12, 2, 4), (13, 34, 10, 5, 6), (13, 35, 9, 4, 2); -- Equipo 7
+(14, 16, 7, 8, 4), (14, 17, 6, 9, 5), (14, 18, 9, 7, 3), (14, 19, 8, 10, 4), (14, 20, 5, 12, 2), 
+(14, 36, 16, 1, 5), (14, 37, 13, 2, 6), (14, 38, 15, 1, 3), (14, 39, 11, 3, 7), (14, 40, 12, 2, 5);
 
--- Partida 14: GossipGirl (16-20) / UpsideDown (36-40)
+-- Partida 15: Avengers (Equipo 2) vs TVD (Equipo 7) --> Gana TVD 2-4
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(14, 16, 11, 4, 6), (14, 17, 9, 5, 5), (14, 18, 14, 3, 3), (14, 19, 10, 6, 8), (14, 20, 8, 7, 4), -- Equipo 4
-(14, 36, 12, 4, 5), (14, 37, 9, 6, 7), (14, 38, 11, 5, 4), (14, 39, 8, 7, 3), (14, 40, 6, 9, 6); -- Equipo 8
+(15, 6, 7, 8, 4), (15, 7, 6, 9, 5), (15, 8, 9, 7, 3), (15, 9, 8, 10, 4), (15, 10, 5, 12, 2), 
+(15, 31, 16, 1, 5), (15, 32, 13, 2, 6), (15, 33, 15, 1, 3), (15, 34, 11, 3, 7), (15, 35, 12, 2, 5);
 
--- Partida 15: Avengers (6-10) / TVD (31-35)
+-- Partida 16: Avengers (Equipo 2) vs UpsideDown (Equipo 8) --> Gana Avengers 4-1
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(16, 6, 14, 2, 5), (16, 7, 11, 3, 4), (16, 8, 13, 2, 6), (16, 9, 10, 4, 8), (16, 10, 12, 2, 3), -- Equipo 2
-(16, 31, 10, 5, 4), (16, 32, 8, 6, 6), (16, 33, 11, 4, 3), (16, 34, 9, 7, 5), (16, 35, 7, 8, 2); -- Equipo 7
+(16, 6, 16, 1, 5), (16, 7, 13, 2, 6), (16, 8, 15, 1, 3), (16, 9, 11, 3, 7), (16, 10, 12, 2, 5), 
+(16, 36, 7, 8, 4), (16, 37, 6, 9, 5), (16, 38, 9, 7, 3), (16, 39, 8, 10, 4), (16, 40, 5, 12, 2);
 
--- Partida 16: Avengers (6-10) / UpsideDown (36-40)
+-- FINAL
+-- Partida 17: Avengers (Equipo 2) vs TVD (Equipo 7) --> Gana TVD 4-6
 INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(15, 6, 16, 1, 4), (15, 7, 13, 2, 6), (15, 8, 15, 1, 3), (15, 9, 11, 3, 7), (15, 10, 10, 2, 5), -- Equipo 2
-(15, 36, 7, 8, 4), (15, 37, 6, 9, 5), (15, 38, 9, 7, 3), (15, 39, 8, 10, 4), (15, 40, 5, 12, 2); -- Equipo 8
+(17, 6, 7, 8, 4), (17, 7, 6, 9, 5), (17, 8, 9, 7, 3), (17, 9, 8, 10, 4), (17, 10, 5, 12, 2), 
+(17, 31, 16, 1, 5), (17, 32, 13, 2, 6), (17, 33, 15, 1, 3), (17, 34, 11, 3, 7), (17, 35, 12, 2, 5); 
 
--- Partida 17: Avengers (6-10) / TVD (31-35)
-INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
-(17, 6, 15, 1, 3), (17, 7, 13, 2, 4), (17, 8, 17, 0, 2), (17, 9, 11, 2, 5), (17, 10, 12, 1, 4), -- Equipo 2
-(17, 31, 8, 6, 4), (17, 32, 6, 7, 5), (17, 33, 10, 5, 3), (17, 34, 7, 8, 6), (17, 35, 5, 9, 7); -- Equipo 7
+
+
+------------
+-- TORNEO 2 
+------------
+-- INSCRIPCIONES PARA EL TORNEO 2 (Los Champions de la Champions)
+INSERT INTO Inscripciones (id_torneo, id_equipo) VALUES 
+(2, 1), (2, 3), (2, 6), (2, 10);
+-- TORNEO 2
+-- Fase de Grupos (grupo 1): 
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase) VALUES 
+(2, 1, 3, '2026-05-02 14:00:00', 7, 1, 'fase de grupos'),
+(2, 1, 6, '2026-05-03 14:00:00', 2, 2, 'fase de grupos'),
+(2, 1, 10, '2026-05-04 14:00:00', 5, 2, 'fase de grupos'),
+(2, 3, 6, '2026-05-05 14:00:00', 3, 2, 'fase de grupos'),
+(2, 3, 10, '2026-05-06 14:00:00', 1, 1, 'fase de grupos'),
+(2, 6, 10, '2026-05-07 14:00:00', 0, 0, 'fase de grupos');
+-- resultados --> Equipo 1: (7 pts), Equipo 3: (4 pts), Equipo 6: (2 pts), Equipo 10: (2 pts)
+-- Pasan directo a la final equipo 1 y 3
+--FINAL
+INSERT INTO Partidas (id_torneo, id_equipo_a, id_equipo_b, fecha_hora, score_a, score_b, fase)
+VALUES (2, 1, 3, '2026-05-15 12:00:00', 4, 3, 'final'); -- Campeón Equipo 1
