@@ -55,7 +55,7 @@ CREATE TABLE Partidas (
     id_torneo INT REFERENCES Torneos(id_torneo),
     id_equipo_a INT REFERENCES Equipos(id_equipo),
     id_equipo_b INT REFERENCES Equipos(id_equipo),
-    fecha_hora TIMESTAMP
+    fecha_hora TIMESTAMP,
     score_a INT,
     score_b INT,
     fase VARCHAR(50), -- grupos, semifinal, final
