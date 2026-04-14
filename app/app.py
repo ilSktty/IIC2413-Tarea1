@@ -45,6 +45,19 @@ def detalle_torneo(id_torneo):
     conn = get_db_connection()
     cur = conn.cursor()
 
+
+    cur.execute("""
+        SELECT id_torneo, COUNT(*) 
+        FROM Partidas 
+        GROUP BY id_torneo;
+    """)
+    result = cur.fetchall()
+    print("Resumen partidas por torneo:")
+    for r in result:
+        print(r)
+
+
+
 # Info básica
     cur.execute('''
         SELECT nombre, videojuego, prize_pool_usd, fecha_inicio, fecha_fin, max_equipos
@@ -119,7 +132,7 @@ def detalle_torneo(id_torneo):
             p.fecha_hora;
     ''', (id_torneo,))
     partidas = cur.fetchall()
-    print(f'len partidas: {len(partidas)}')
+    print(f' cantidad partidas: {len(partidas)}') ############
 
 # 3.Equipos inscritos
     cur.execute('''
@@ -155,6 +168,10 @@ def detalle_torneo(id_torneo):
         equipos_inscritos=equipos_inscritos,
         sponsors=sponsors
     )
+
+
+
+
 
 
 # --------------------------

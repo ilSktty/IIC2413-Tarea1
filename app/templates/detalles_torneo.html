@@ -4,7 +4,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}">
     <title>Detalle - {{ torneo[0] }}</title>
 </head>
+
 <body> 
+
     <header>
         <h1>{{ torneo[0] }}</h1>
         <p><strong>Videojuego:</strong> {{ torneo[1] }}</p>
@@ -16,14 +18,19 @@
         <a href="/torneos" class="btn-ver-mas">Volver atrás</a>
         <a href="{{ url_for('estadisticas', id_torneo=id_torneo) }}" class="btn-ver-mas">Estadísticas</a>
     </nav>
-
+<!-- TABLAS DE POSICIONES -->
     <section>
         <h2>Tablas de Posiciones - Fase de Grupos</h2>
-        <div class="contenedor-grupos"> <div>
+
+        <div class="contenedor-grupos"> 
+
+            <div class="grupo-tabla" >
                 <h3>Grupo A</h3>
-                <table border="1">
+                <table>
                     <thead>
-                        <tr><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th></tr>
+                        <tr>
+                            <th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for fila in tabla_posiciones_a %}
@@ -35,11 +42,14 @@
                     </tbody>
                 </table>
             </div>
-            <div>
+
+            <div class="grupo-tabla">
                 <h3>Grupo B</h3>
-                <table border="1">
+                <table>
                     <thead>
-                        <tr><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th></tr>
+                        <tr>
+                            <th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {% for fila in tabla_posiciones_b %}
@@ -50,10 +60,11 @@
                         {% endfor %}
                     </tbody>
                 </table>
-            </div>
+            </div> 
+
         </div>
     </section>
-
+<!-- HISTORIAL PARTIDAS -->
     <section>
         <h2>Historial de Partidas</h2>
         <table border="1" style="width: 90%; margin-top: 20px;">
@@ -67,6 +78,7 @@
                     <th>Fecha</th>
                 </tr>
             </thead>
+
             <tbody>
                 {% for p in partidas %}
                 <tr>
@@ -80,6 +92,7 @@
                 {% endfor %}
             </tbody>
         </table>
+
     </section>
 </body>
 </html>
