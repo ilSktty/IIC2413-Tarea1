@@ -54,4 +54,4 @@ La aplicacion incluye las siguientes paginas:
 2. /busqueda : Permite buscar jugadores por gamertag o pais y equipos por nombre.
 3. /sponsors : Permite seleccionar un videojuego y listar los sponsors que han auspiciado todos los torneos de ese videojuego, mostrando su nombre, industria y monto total aportado.
 4. /inscripcion : Permite inscribir un equipo en un torneo. La aplicacion valida si el equipo ya esta inscrito y si el torneo alcanzo su numero maximo de equipos.
-5. /estadisticas : 
+5. /estadisticas : Genera un ranking de todos los jugadores del torneo, apartir de su rendimiento general. Además, permite filtrar por equipo para comparar el rendimiento individual de cada jugador en la fase de grupos y la de eliminatorias.
