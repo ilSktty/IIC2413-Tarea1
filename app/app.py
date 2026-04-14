@@ -53,46 +53,57 @@ def detalle_torneo(id_torneo):
     ''', (id_torneo,))
     torneo = cur.fetchone()
 
-# Tabla posiciones
+# Tabla posiciones por grupo 
+    # Obtener equipos inscritos actualmente en este torneo
     cur.execute('''
-        SELECT
-            eq.nombre_equipo,
-            COUNT(*) AS pj,
-            SUM(CASE
-                WHEN (p.id_equipo_a = eq.id_equipo AND p.score_a > p.score_b)
-                  OR (p.id_equipo_b = eq.id_equipo AND p.score_b > p.score_a) THEN 1 ELSE 0
-            END) AS pg,
-            SUM(CASE
-                WHEN p.score_a = p.score_b THEN 1 ELSE 0
-            END) AS pe,
-            SUM(CASE
-                WHEN (p.id_equipo_a = eq.id_equipo AND p.score_a < p.score_b)
-                  OR (p.id_equipo_b = eq.id_equipo AND p.score_b < p.score_a) THEN 1 ELSE 0
-            END) AS pp,
-            SUM(CASE
-                WHEN (p.id_equipo_a = eq.id_equipo AND p.score_a > p.score_b)
-                  OR (p.id_equipo_b = eq.id_equipo AND p.score_b > p.score_a) THEN 3
-                WHEN p.score_a = p.score_b THEN 1
-                ELSE 0
-            END) AS puntaje
-        FROM Equipos eq
-        JOIN Partidas p ON (p.id_equipo_a = eq.id_equipo OR p.id_equipo_b = eq.id_equipo)
-        WHERE p.id_torneo = %s
-          AND p.fase = 'fase de grupos'
-        GROUP BY eq.id_equipo, eq.nombre_equipo
-        ORDER BY puntaje DESC, pg DESC;
+        SELECT id_equipo FROM Inscripciones WHERE id_torneo = %s ORDER BY id_equipo;
     ''', (id_torneo,))
-    tabla_posiciones = cur.fetchall()
+    equipos_ids = [row[0] for row in cur.fetchall()]
 
-# Partidas jugadas
+    # Dividir los equipos en dos grupos 
+    mitad = len(equipos_ids) // 2
+    grupo_a_ids = equipos_ids[:mitad]
+    grupo_b_ids = equipos_ids[mitad:]
+
+    def get_tabla_posiciones(ids):
+        if not ids: return []
+        # 1. Convertimos la lista a una tupla para SQL
+        cur.execute('''
+            SELECT 
+                e.nombre_equipo,
+                COUNT(p.id_partida) as PJ,
+                SUM(CASE WHEN (p.id_equipo_a = e.id_equipo AND p.score_a > p.score_b) OR (p.id_equipo_b = e.id_equipo AND p.score_b > p.score_a) THEN 1 ELSE 0 END) as PG,
+                SUM(CASE WHEN p.score_a = p.score_b AND p.id_partida IS NOT NULL THEN 1 ELSE 0 END) as PE,
+                SUM(CASE WHEN (p.id_equipo_a = e.id_equipo AND p.score_a < p.score_b) OR (p.id_equipo_b = e.id_equipo AND p.score_b < p.score_a) THEN 1 ELSE 0 END) as PP,
+                SUM(CASE 
+                    WHEN (p.id_equipo_a = e.id_equipo AND p.score_a > p.score_b) OR (p.id_equipo_b = e.id_equipo AND p.score_b > p.score_a) THEN 3
+                    WHEN p.score_a = p.score_b AND p.id_partida IS NOT NULL THEN 1 ELSE 0 END) as Pts
+            FROM Equipos e
+            LEFT JOIN Partidas p ON (e.id_equipo = p.id_equipo_a OR e.id_equipo = p.id_equipo_b) 
+                AND p.id_torneo = %s AND p.fase = 'fase de grupos'
+            WHERE e.id_equipo IN %s
+            GROUP BY e.id_equipo, e.nombre_equipo
+            ORDER BY Pts DESC, PG DESC;
+        ''', (id_torneo, tuple(ids)))
+        return cur.fetchall()
+
+    tabla_a = get_tabla_posiciones(grupo_a_ids)
+    tabla_b = get_tabla_posiciones(grupo_b_ids)
+
+    # 2. Partidas jugadas: todas las fases 
+
     cur.execute('''
         SELECT
-            p.id_partida,
+            p.fase,
             ea.nombre_equipo AS equipo_a,
             eb.nombre_equipo AS equipo_b,
             p.score_a,
             p.score_b,
-            p.fase,
+            CASE 
+                WHEN p.score_a > p.score_b THEN ea.nombre_equipo
+                WHEN p.score_b > p.score_a THEN eb.nombre_equipo
+                ELSE 'Empate'
+            END AS ganador,
             p.fecha_hora
         FROM Partidas p
         JOIN Equipos ea ON p.id_equipo_a = ea.id_equipo
@@ -108,8 +119,9 @@ def detalle_torneo(id_torneo):
             p.fecha_hora;
     ''', (id_torneo,))
     partidas = cur.fetchall()
+    print(f'len partidas: {len(partidas)}')
 
-# Equipos inscritos
+# 3.Equipos inscritos
     cur.execute('''
         SELECT eq.nombre_equipo, eq.fecha_creacion
         FROM Equipos eq
@@ -119,7 +131,7 @@ def detalle_torneo(id_torneo):
     ''', (id_torneo,))
     equipos_inscritos = cur.fetchall()
 
-# Sponsors
+# 4. Sponsors
     cur.execute('''
         SELECT s.nombre, s.industria, a.monto_usd
         FROM Sponsors s
@@ -137,7 +149,8 @@ def detalle_torneo(id_torneo):
         'detalles_torneo.html',
         torneo=torneo,
         id_torneo=id_torneo,
-        tabla_posiciones=tabla_posiciones,
+        tabla_posiciones_a=tabla_a,
+        tabla_posiciones_b=tabla_b,
         partidas=partidas,
         equipos_inscritos=equipos_inscritos,
         sponsors=sponsors

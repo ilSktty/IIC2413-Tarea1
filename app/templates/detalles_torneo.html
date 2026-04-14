@@ -2,47 +2,84 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='diseno.css') }}">
-    <title>Detalle del Torneo</title>
+    <title>Detalle - {{ torneo[0] }}</title>
 </head>
+<body> 
+    <header>
+        <h1>{{ torneo[0] }}</h1>
+        <p><strong>Videojuego:</strong> {{ torneo[1] }}</p>
+        <p><strong>Fecha:</strong> {{ torneo[3] }} al {{ torneo[4] }}</p>
+        <p><strong>Prize Pool:</strong> ${{ "{:,.2f}".format(torneo[2]) }} USD</p>
+    </header>
 
-<body class="detalle"> 
-    <h1>Detalle del Torneo: {{ torneo[0] }}</h1>
-    <nav><a href="/torneos" class="btn-ver-mas">Volver atrás</a>
-        <a href="{{ url_for('estadisticas', id_torneo=id_torneo) }} " class="btn-ver-mas">Conocer las estadisticas de la partida</a>
+    <nav>
+        <a href="/torneos" class="btn-ver-mas">Volver atrás</a>
+        <a href="{{ url_for('estadisticas', id_torneo=id_torneo) }}" class="btn-ver-mas">Estadísticas</a>
     </nav>
 
-    <h2>Tabla de Posiciones</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Equipo</th>
-                <th>Partidas jugadas</th>
-                <th>Partidas ganadas</th>
-                <th>Partidas Empatados</th>
-                <th>Partidas Perdidas</th>
-                <th>Pts</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for fila in tabla_posiciones %}
-            <tr>
-                <td>{{ fila[0] }}</td> <td>{{ fila[1] }}</td> <td>{{ fila[2] }}</td> <td>{{ fila[3] }}</td> <td>{{ fila[4] }}</td> <td>{{ fila[5] }}</td> </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <section>
+        <h2>Tablas de Posiciones - Fase de Grupos</h2>
+        <div class="contenedor-grupos"> <div>
+                <h3>Grupo A</h3>
+                <table border="1">
+                    <thead>
+                        <tr><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for fila in tabla_posiciones_a %}
+                        <tr>
+                            <td>{{ fila[0] }}</td><td>{{ fila[1] }}</td><td>{{ fila[2] }}</td>
+                            <td>{{ fila[3] }}</td><td>{{ fila[4] }}</td><td><strong>{{ fila[5] }}</strong></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h3>Grupo B</h3>
+                <table border="1">
+                    <thead>
+                        <tr><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>Pts</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for fila in tabla_posiciones_b %}
+                        <tr>
+                            <td>{{ fila[0] }}</td><td>{{ fila[1] }}</td><td>{{ fila[2] }}</td>
+                            <td>{{ fila[3] }}</td><td>{{ fila[4] }}</td><td><strong>{{ fila[5] }}</strong></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
-    <h2>Partidas</h2>
-    <ul>
-        {% for p in partidas %}
-            <li><strong>{{ p[5] }}</strong>: {{ p[1] }} ({{ p[3] }}) vs {{ p[2] }} ({{ p[4] }})</li>
-        {% endfor %}
-    </ul>
-
-    <h2>Equipos Inscritos</h2>
-    <p>{% for e in equipos_inscritos %}{{ e[0] }}{% if not loop.last %}, {% endif %}{% endfor %}</p>
-
-    <h2>Sponsors</h2>
-    <p>{% for s in sponsors %}{{ s[0] }} (${{ s[2] }}){% if not loop.last %}, {% endif %}{% endfor %}</p>
-
+    <section>
+        <h2>Historial de Partidas</h2>
+        <table border="1" style="width: 90%; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th>Fase</th>
+                    <th>Equipo A</th>
+                    <th>Score</th>
+                    <th>Equipo B</th>
+                    <th>Ganador</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in partidas %}
+                <tr>
+                    <td>{{ p[0]|capitalize }}</td>
+                    <td>{{ p[1] }}</td>
+                    <td style="text-align: center; font-weight: bold;">{{ p[3] }} - {{ p[4] }}</td>
+                    <td>{{ p[2] }}</td>
+                    <td style="color: #056f0e; font-weight: bold;">{{ p[5] }}</td>
+                    <td>{{ p[6].strftime('%d/%m %H:%M') if p[6] else '' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </body>
 </html>
