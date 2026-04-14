@@ -196,23 +196,24 @@ def estadisticas():
 
 
     seleccionados = []
-    consulta ='''
-    SELECT 
-        j.gamertag,
-        COALESCE(ROUND(AVG(e.kos) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_kos_grupos,
-        COALESCE(ROUND(AVG(e.restarts) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_restarts_grupos,
-        COALESCE(ROUND(AVG(e.assists) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_assists_grupos,
-        COALESCE(ROUND(AVG(e.kos) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_kos_eliminatorias,
-        COALESCE(ROUND(AVG(e.restarts) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_restarts_eliminatorias,
-        COALESCE(ROUND(AVG(e.assists) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_assists_eliminatorias
-    FROM Estadisticas e
-    JOIN Partidas p ON e.id_partida = p.id_partida
-    JOIN Jugadores j ON e.id_jugador = j.id_jugador
-    WHERE p.id_torneo = %s AND j.id_equipo = %s
-    GROUP BY j.gamertag
-    '''
-    cur.execute(consulta,(id_torneo, id_equipo_seleccionado))
-    seleccionados = cur.fetchall()
+    if id_equipo_seleccionado:
+        consulta ='''
+        SELECT 
+            j.gamertag,
+            COALESCE(ROUND(AVG(e.kos) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_kos_grupos,
+            COALESCE(ROUND(AVG(e.restarts) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_restarts_grupos,
+            COALESCE(ROUND(AVG(e.assists) FILTER (WHERE p.fase='fase de grupos'), 2), 0) AS avg_assists_grupos,
+            COALESCE(ROUND(AVG(e.kos) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_kos_eliminatorias,
+            COALESCE(ROUND(AVG(e.restarts) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_restarts_eliminatorias,
+            COALESCE(ROUND(AVG(e.assists) FILTER (WHERE p.fase IN ('semifinal','final')), 2), 0) AS avg_assists_eliminatorias
+        FROM Estadisticas e
+        JOIN Partidas p ON e.id_partida = p.id_partida
+        JOIN Jugadores j ON e.id_jugador = j.id_jugador
+        WHERE p.id_torneo = %s AND j.id_equipo = %s
+        GROUP BY j.gamertag
+        '''
+        cur.execute(consulta,(id_torneo, id_equipo_seleccionado))
+        seleccionados = cur.fetchall()
 
     cur.close()
     conn.close()
