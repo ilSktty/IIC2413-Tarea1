@@ -24,7 +24,7 @@ CREATE TABLE Equipos (
     id_equipo SERIAL PRIMARY KEY,
     nombre_equipo VARCHAR(100) UNIQUE NOT NULL,
     fecha_creacion DATE,
-    id_capitan INT NOT NULL-- Se vincula después de crear Jugadores
+    id_capitan INT NOT NULL -- Se vincula después de crear Jugadores
 );
 
 CREATE TABLE Jugadores (
@@ -58,7 +58,7 @@ CREATE TABLE Partidas (
     fecha_hora TIMESTAMP,
     score_a INT,
     score_b INT,
-    fase VARCHAR(50), -- grupos, semifinal, final
+    fase VARCHAR(50),
     CONSTRAINT fk_equipo_a FOREIGN KEY (id_torneo, id_equipo_a) REFERENCES Inscripciones(id_torneo, id_equipo),
     CONSTRAINT fk_equipo_b FOREIGN KEY (id_torneo, id_equipo_b) REFERENCES Inscripciones(id_torneo, id_equipo),
     CONSTRAINT equipos_distintos CHECK (id_equipo_a <> id_equipo_b),
@@ -78,7 +78,6 @@ CREATE TABLE Estadisticas (
     CONSTRAINT restarts_pos CHECK (restarts >= 0),
     CONSTRAINT assists_pos CHECK (assists >= 0)
 );
--- No estamos asegurando todavia que ese jugador pertenezca a alguno de los dos equipos de la partida.
 
 CREATE TABLE Auspicios (
     id_sponsor INT REFERENCES Sponsors(id_sponsor),
