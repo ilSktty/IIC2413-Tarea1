@@ -58,4 +58,5 @@ La aplicacion incluye las siguientes paginas:
 6. /estadisticas : Genera un ranking de todos los jugadores del torneo, apartir de su rendimiento general. Además, permite filtrar por equipo para comparar el rendimiento individual de cada jugador en la fase de grupos y la de eliminatorias.
 
 ## Informacion Relevante
-Se debe tener en cuenta que la aplicacion corre en localhost.
+- Se debe tener en cuenta que la aplicacion corre en localhost.
+- En la pagina /sponsors se selecciona de videojuegos existentes y desde ahi se buscan sus sponsors. Si se quisiese buscar un videojuego que no exista para que el mensaje "No se encontraron sponsors" aparezca, hay que abrir en el navegador http://127.0.0.1:5000/sponsors?"videojuego inexistente" donde en "videojuego inexistente" ponemos el nombre del video juego que estamos intentando buscar sus sponsors (uno inexistente), como por ejemplo abrir en el navegador http://127.0.0.1:5000/sponsors?videojuego=Clash Royale
