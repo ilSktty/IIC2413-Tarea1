@@ -50,8 +50,8 @@ http://127.0.0.1:5000
 
 # Funcionalidades implementadas
 La aplicacion incluye las siguientes paginas:
-1. / : Pagina de Torneos. Corresponde a la página de inicio. Muestra 4 opciones para interactuar con la aplicación (4 botones)
-2. /torneos : Permite conocer los torneos de Torneo de Gaming. Además, al seleccionar el botón para ver más información, se despliegan detalles del torneo seleccionado.
+1. / : Pagina de Torneos (/pagina_inicio). Corresponde a la página de inicio. Muestra 4 opciones para interactuar con la aplicación (4 botones)
+2. /torneos : Permite conocer los torneos de Torneo de Gaming. Además, al seleccionar el botón para ver más información, se despliegan detalles del torneo seleccionado (/detalles_torneo).
 3. /busqueda : Permite buscar jugadores por gamertag o pais, y equipos por nombre.
 4. /sponsors : Permite seleccionar un videojuego y listar los sponsors que han auspiciado todos los torneos de ese videojuego, mostrando su nombre, industria y monto total aportado.
 5. /inscripcion : Permite inscribir un equipo en un torneo. La aplicacion valida si el equipo ya esta inscrito y si el torneo alcanzo su numero maximo de equipos.
