@@ -62,7 +62,7 @@ CREATE TABLE Partidas (
     CONSTRAINT fk_equipo_a FOREIGN KEY (id_torneo, id_equipo_a) REFERENCES Inscripciones(id_torneo, id_equipo),
     CONSTRAINT fk_equipo_b FOREIGN KEY (id_torneo, id_equipo_b) REFERENCES Inscripciones(id_torneo, id_equipo),
     CONSTRAINT equipos_distintos CHECK (id_equipo_a <> id_equipo_b),
-    CONSTRAINT fases_correctas CHECK (LOWER(fase) IN ('fase de grupos', 'cuartos de final', 'semifinal', 'final')), -- hacerlo lowercase, que de lo mismo como lo ingresen
+    CONSTRAINT fases_correctas CHECK (LOWER(fase) IN ('fase de grupos', 'cuartos de final', 'semifinal', 'final')),
     CONSTRAINT revisar_a CHECK (score_a >= 0),
     CONSTRAINT revisar_b CHECK (score_b >= 0)
 );
