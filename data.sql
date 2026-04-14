@@ -1,7 +1,7 @@
 -- INSERTAR TORNEOS (3)
 INSERT INTO Torneos (nombre, videojuego, fecha_inicio, fecha_fin, prize_pool_usd, max_equipos) VALUES 
 ('Copa Grand Prix', 'Mario Kart', '2026-05-01', '2026-05-15', 50000.00, 8),
-('ArenaKing', 'Mario Kart', '2026-06-10', '2026-06-20', 25000.00, 16),
+('ArenaKing', 'Mario Kart', '2026-06-10', '2026-06-20', 25000.00, 8),
 ('Los Champions de la Champions', 'EA Sports FC 26', '2026-07-05', '2026-07-15', 100000.00, 8);
 
 -- INSERTAR EQUIPOS (10)
