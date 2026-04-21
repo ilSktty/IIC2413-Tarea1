@@ -24,7 +24,7 @@ CREATE TABLE Equipos (
     id_equipo SERIAL PRIMARY KEY,
     nombre_equipo VARCHAR(100) UNIQUE NOT NULL,
     fecha_creacion DATE,
-    id_capitan INT NOT NULL -- Se vincula después de crear Jugadores
+    id_capitan INT -- Se vincula después de crear Jugadores
 );
 
 CREATE TABLE Jugadores (

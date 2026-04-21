@@ -224,6 +224,7 @@ INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES
 (13, 16, 18, 2, 8), (13, 17, 15, 3, 9), (13, 18, 12, 4, 10), (13, 19, 14, 2, 5), (13, 20, 11, 3, 7), -- Eq 4
 (13, 26, 12, 6, 4), (13, 27, 10, 7, 5), (13, 28, 9, 8, 3), (13, 29, 8, 6, 4), (13, 30, 7, 9, 6); -- Eq 6
 -- Semi 2: TVD (Eq 7) vs The Office (Eq 3) -> Gana Eq 7 (2-0)
+INSERT INTO Estadisticas (id_partida, id_jugador, kos, restarts, assists) VALUES 
 (14, 31, 20, 1, 5), (14, 32, 19, 2, 4), (14, 33, 14, 1, 9), (14, 34, 15, 2, 6), (14, 35, 12, 2, 10), -- Eq 7
 (14, 11, 7, 10, 3), (14, 12, 6, 11, 4), (14, 13, 5, 12, 5), (14, 14, 8, 9, 2), (14, 15, 4, 13, 3); -- Eq 3
 
